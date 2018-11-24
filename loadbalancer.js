@@ -1,6 +1,7 @@
 var httpProxy = require("http-proxy");
 var http = require('http');
 var where=require('node-where');
+var request=require('request');
 
 
 var proxy = httpProxy.createProxyServer({});
@@ -9,7 +10,11 @@ var server=http.createServer( function (req, res){
     // console.log(req)
     // console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
     
-	
+	request('http://freegeoip.net/json/207.97.227.239', { json: true }, (err, res, body) => {
+  		if (err) { return console.log(err); }
+  		console.log(body.url);
+  		console.log(body.explanation);
+	});
 	var country,state
 	where.is(req.connection.remoteAddress, function (err, result) {
 		console.log(result);
