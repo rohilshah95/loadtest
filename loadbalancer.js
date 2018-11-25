@@ -10,11 +10,11 @@ var server=http.createServer( function (req, res){
     // console.log(req)
     // console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
     
-	request('http://freegeoip.net/json/207.97.227.239', { json: true }, (err, res, body) => {
-  		if (err) { return console.log(err); }
-  		console.log(body.url);
-  		console.log(body.explanation);
-	});
+	http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
+  resp.on('data', function(ip) {
+    console.log("My public IP address is: " + ip);
+  });
+});
 	var country,state
 	where.is(req.connection.remoteAddress, function (err, result) {
 		console.log(result);
