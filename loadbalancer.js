@@ -10,10 +10,11 @@ var server=http.createServer( function (req, res){
     // console.log(req)
     // console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
     
-	http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
-  resp.on('data', function(ip) {
-    console.log("My public IP address is: " + ip);
-  });
+	
+request('http://api.ipstack.com/71.69.168.64?access_key=c0273b268891b3ff95fbbe82a9b223aa', { json: true }, (err, res, body) => {
+  if (err) { return console.log(err); }
+  console.log(body.url);
+  console.log(body.explanation);
 });
 	var country,state
 	where.is(req.connection.remoteAddress, function (err, result) {
