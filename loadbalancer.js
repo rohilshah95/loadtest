@@ -52,7 +52,7 @@ var server=http.createServer( function (req, res){
 		// }
 		
 	});
-});
+
 
 // var checkStatus = setInterval(function () {
 // 	try {
