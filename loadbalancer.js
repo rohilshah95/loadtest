@@ -2,7 +2,7 @@ var httpProxy = require("http-proxy");
 var http = require('http');
 var where=require('node-where');
 var request=require('request');
-const geoip = require('geoip-lookup')
+const geoip = require('geoip-lite')
 
 
 var proxy = httpProxy.createProxyServer({});
@@ -14,10 +14,9 @@ var server=http.createServer( function (req, res){
 	
 	
 	var country,state
-	geoip.lookup(req.connection.remoteAddress, (err, result) => {
-		console.log(result);
-		country=result.get('countryCode');
-        // state=result.get('regionCode');
+	result = geoip.lookup(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+	console.log(result);
+	// state=result.get('regionCode');
         if(country!='US')
         {
             proxy.web(req, res, {target: "http://localhost:3000"}, function (e){
