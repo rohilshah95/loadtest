@@ -2,7 +2,7 @@ var httpProxy = require("http-proxy");
 var http = require('http');
 var where=require('node-where');
 var request=require('request');
-const ipstack = require('ipstack')
+const ipstack = require('geoip-lite')
 
 
 var proxy = httpProxy.createProxyServer({});
@@ -14,7 +14,7 @@ var server=http.createServer( function (req, res){
 	
 	
 	var country,state
-	ipstack(req.connection.remoteAddress, "c0273b268891b3ff95fbbe82a9b223aa", (err, result) => {
+	geoip.lookup(req.connection.remoteAddress, (err, result) => {
 		console.log(result);
 		country=result.get('countryCode');
         // state=result.get('regionCode');
