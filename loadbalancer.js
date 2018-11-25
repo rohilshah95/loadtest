@@ -2,6 +2,7 @@ var httpProxy = require("http-proxy");
 var http = require('http');
 var where=require('node-where');
 var request=require('request');
+const ipstack = require('ipstack')
 
 
 var proxy = httpProxy.createProxyServer({});
@@ -11,13 +12,9 @@ var server=http.createServer( function (req, res){
     // console.log(req.headers['x-forwarded-for'] || req.connection.remoteAddress);
     
 	
-request('http://api.ipstack.com/71.69.168.64?access_key=c0273b268891b3ff95fbbe82a9b223aa', { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  console.log(body.url);
-  console.log(body.explanation);
-});
+	
 	var country,state
-	where.is(req.connection.remoteAddress, function (err, result) {
+	ipstack(req.connection.remoteAddress, "c0273b268891b3ff95fbbe82a9b223aa" function (err, result) {
 		console.log(result);
 		country=result.get('countryCode');
         // state=result.get('regionCode');
