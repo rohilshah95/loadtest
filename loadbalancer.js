@@ -14,7 +14,7 @@ var server=http.createServer( function (req, res){
 	
 	
 	var country,state
-	ipstack(req.connection.remoteAddress, "c0273b268891b3ff95fbbe82a9b223aa" function (err, result) {
+	ipstack(req.connection.remoteAddress, "c0273b268891b3ff95fbbe82a9b223aa" (err, result) => {
 		console.log(result);
 		country=result.get('countryCode');
         // state=result.get('regionCode');
