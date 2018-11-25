@@ -2,7 +2,7 @@ var httpProxy = require("http-proxy");
 var http = require('http');
 var where=require('node-where');
 var request=require('request');
-const geoip = require('geoip-lite')
+const geoip = require('geoip-lookup')
 
 
 var proxy = httpProxy.createProxyServer({});
